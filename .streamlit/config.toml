@@ -1,0 +1,15 @@
+[theme]
+# Built-in Streamlit theme (no HTML/CSS needed).
+# Tweak these to taste; they apply app-wide.
+base = "dark"
+primaryColor = "#7C5CFF"
+backgroundColor = "#0E1117"
+secondaryBackgroundColor = "#151A24"
+textColor = "#F2F4F8"
+font = "sans serif"
+
+[server]
+# Makes file watching behave better on some setups; safe default.
+runOnSave = true
+
+

@@ -1,0 +1,34 @@
+# Virtual environments
+.venv/
+__pycache__/
+*.py[cod]
+
+# Tool caches
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Python tooling
+.python-version
+.coverage
+htmlcov/
+
+# OS junk
+.DS_Store
+
+# Build artifacts
+dist/
+build/
+
+# vs workspace
+.vscode/
+
+# Env files / secrets
+.env
+.env.*
+
+# data
+data/
+
+# Streamlit
+.streamlit/secrets.toml
