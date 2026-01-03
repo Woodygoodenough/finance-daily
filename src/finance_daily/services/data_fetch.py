@@ -2,7 +2,8 @@ from dataclasses import dataclass, field
 from pathlib import Path
 import pandas as pd
 from urllib.parse import urljoin
-from finance_daily.config import AppConfig, DatasetName
+from finance_daily.config import AppConfig
+from finance_daily.constants import DatasetName
 
 
 @dataclass
@@ -19,9 +20,6 @@ def fetch_and_store(config: AppConfig) -> FetchResult:
 
     Returns a FetchResult so the UI can show what happened.
     """
-    if config.data_dir is None:
-        raise ValueError("config.data_dir is not set")
-
     config.data_dir.mkdir(parents=True, exist_ok=True)
 
     errors: list[str] = []

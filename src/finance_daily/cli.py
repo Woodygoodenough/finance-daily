@@ -6,6 +6,7 @@ import sys
 def dev():
     env = os.environ.copy()
     env["DATA_DIR"] = "./data"
+    env["CONFIG_DIR"] = "./finance_daily_config"
 
     subprocess.run(
         [

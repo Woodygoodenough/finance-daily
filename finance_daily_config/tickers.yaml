@@ -1,0 +1,18 @@
+equities:
+  - symbol: GOOG
+    name: Alphabet Inc.
+  - symbol: AMZN
+    name: Amazon.com Inc.
+  - symbol: TSLA
+    name: Tesla Inc.
+  - symbol: IREN
+    name: IREN Ltd
+  - symbol: PLTR
+    name: Palantir Technologies Inc.
+
+ETFs:
+  - symbol: SPY
+    name: SPDR S&P 500 ETF
+  - symbol: QQQ
+    name: Invesco QQQ Trust
+

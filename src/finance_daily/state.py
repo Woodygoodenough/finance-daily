@@ -11,9 +11,10 @@ def get_app_ctx() -> AppContext:
     ctx = st.session_state.get(_CTX_KEY)
     if ctx is None:
         ctx = AppContext(
-            test_str_1="test_str_1",
-            test_str_2="test_str_2",
             lastest_data_date=datetime.now(),
+            # later tries to fetch the metadata to understand if the data is up to date
+            last_fetch_ok=True,
+            last_fetch_error=None,
         )
         st.session_state[_CTX_KEY] = ctx
     return ctx
