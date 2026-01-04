@@ -20,6 +20,8 @@ dependencies = [
 
 [project.scripts]
 dev = "finance_daily.cli:dev"
+prod = "finance_daily.cli:prod"
+nightly_fetch = "finance_daily.cli:nightly_fetch"
 
 [tool.poetry]
 packages = [{include = "finance_daily", from = "src"}]

@@ -19,3 +19,32 @@ def dev():
         check=True,
         env=env,
     )
+
+
+def prod():
+    env = os.environ.copy()
+
+    subprocess.run(
+        [
+            sys.executable,
+            "-m",
+            "streamlit",
+            "run",
+            "src/finance_daily/app.py",
+        ],
+        check=True,
+        env=env,
+    )
+
+
+def nightly_fetch():
+    env = os.environ.copy()
+    subprocess.run(
+        [
+            sys.executable,
+            "-m",
+            "finance_daily.services.nightly_fetch",
+        ],
+        check=True,
+        env=env,
+    )

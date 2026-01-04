@@ -1,10 +1,9 @@
 import streamlit as st
 
-from finance_daily.state import get_app_ctx, get_app_config
+from finance_daily.state import get_app_ctx, get_app_config, update_app_ctx
 from finance_daily.constants import DatasetName, SnapshotFields
 from finance_daily.components import SnapshotTableSpec, render_snapshot_table
 from finance_daily.components import NewsFeedSpec, df_to_news_items, render_news_feed
-from finance_daily.services.data_fetch import fetch_and_store
 from finance_daily.utils import load_dataset
 
 
@@ -25,27 +24,16 @@ with top_col_1:
         "Refresh data",
         type="primary",
         width="content",
-        help="Fetch the latest dataset from the configured remote source and store it locally.",
+        help="Reload the metadata from the database.",
     )
 
-    # if refresh_clicked:
-    #     with st.spinner("Fetching and storing datasets..."):
-    #         result = fetch_and_store(cfg)
-
-    #     ctx.lastest_data_date = datetime.now()
-    #     ctx.last_fetch_ok = result.ok
-    #     ctx.last_fetch_error = "\n".join(result.errors) if result.errors else None
-    #     st.session_state["app_ctx"] = ctx
-
-    #     if result.ok:
-    #         st.success("Data refreshed successfully.")
-    #     else:
-    #         st.error("Refresh completed with errors.")
+    if refresh_clicked:
+        update_app_ctx()
 
     st.metric(
         "Last refresh",
         value=(
-            ctx.lastest_data_date.strftime("%Y-%m-%d %H:%M:%S")
+            ctx.lastest_data_date.strftime("%Y-%m-%d %H:%M")
             if ctx.lastest_data_date
             else "—"
         ),

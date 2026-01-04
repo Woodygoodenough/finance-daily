@@ -7,6 +7,7 @@ class DatasetName(str, Enum):
     FACT_LATEST = "fact_all_daily_snapshots.csv"
     FACT_NEWS_RAW = "fact_all_news_raw.csv"
     FACT_FUNDAMENTALS = "fact_equities_fundamentals.csv"
+    DIM_META = "dim_etl_meta.csv"
     """
     DIM_DATE = "dim_date"
     DIM_TICKER = "dim_ticker"
@@ -15,6 +16,9 @@ class DatasetName(str, Enum):
     ETL_METADATA = "etl_metadata"
     """
 
+
+# per ticker dataset names
+DAILY_RAW_T = "fact_all_daily_raw_{symbol}.csv"
 
 # project structure
 PAGES_DIR = "pages_impl"
@@ -26,6 +30,12 @@ FUNDAMENTALS_SCT = Path(PAGES_DIR) / "fundamentals.py"
 
 # config file names
 TICKERS_F = "tickers.yaml"
+
+
+# ETL meta fields
+class ETLMetaFields(str, Enum):
+    OVERALL_SUCCESS = "overall_success"
+    LAST_ETL_TIMESTAMP = "etl_timestamp"
 
 
 # field names
