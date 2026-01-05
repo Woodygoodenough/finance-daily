@@ -84,3 +84,7 @@ def nightly_fetch() -> None:
     else:
         print("Data fetched with errors")
         print(result.errors)
+
+
+if __name__ == "__main__":
+    nightly_fetch()
