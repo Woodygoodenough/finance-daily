@@ -18,23 +18,28 @@ def get_app_ctx() -> AppContext:
 
 
 def update_app_ctx() -> AppContext:
-    etl_meta = _load_etl_meta(get_app_config())
-    last_etl_timestamp = datetime.fromisoformat(
-        etl_meta.loc[:, ETLMetaFields.LAST_ETL_TIMESTAMP.value].iloc[0]
-    )
-    last_etl_success = etl_meta.loc[:, ETLMetaFields.OVERALL_SUCCESS.value].iloc[0]
+    last_etl_timestamp = _load_etl_meta(get_app_config())
     ctx = AppContext(
         lastest_data_date=last_etl_timestamp,
         # later tries to fetch the metadata to understand if the data is up to date
-        last_fetch_ok=last_etl_success == 1,
+        last_fetch_ok=True,
         last_fetch_error=None,
     )
     st.session_state[_CTX_KEY] = ctx
     return ctx
 
 
-def _load_etl_meta(config: AppConfig) -> pd.DataFrame:
-    return load_dataset(DatasetName.DIM_META, config=config)
+def _load_etl_meta(config: AppConfig) -> datetime:
+    group1_df = load_dataset(DatasetName.DIM_META_GROUP1, config=config)
+    group2_df = load_dataset(DatasetName.DIM_META_GROUP2, config=config)
+    if (
+        group1_df[ETLMetaFields.OVERALL_SUCCESS.value].iloc[0] == 1
+        and group2_df[ETLMetaFields.OVERALL_SUCCESS.value].iloc[0] == 1
+    ):
+        return datetime.fromisoformat(
+            group1_df[ETLMetaFields.LAST_ETL_TIMESTAMP.value].iloc[0]
+        )
+    raise ValueError("ETL workflow may have failed, please check the logs")
 
 
 def get_app_config() -> AppConfig:
