@@ -25,7 +25,29 @@ nightly_fetch = "finance_daily.cli:nightly_fetch"
 dev_nightly_fetch = "finance_daily.cli:dev_nightly_fetch"
 
 [tool.poetry]
+name = "finance-daily"
+version = "0.1.0"
+description = ""
+authors = ["Your Name <you@example.com>"]
+readme = "README.md"
 packages = [{include = "finance_daily", from = "src"}]
+
+[tool.poetry.dependencies]
+python = ">=3.13"
+streamlit = ">=1.52.2,<2.0.0"
+pydantic = ">=2.12.5,<3.0.0"
+pydantic-settings = ">=2.12.0,<3.0.0"
+pyyaml = ">=6.0.3,<7.0.0"
+streamlit-aggrid = ">=1.2.1.post2,<2.0.0"
+plotly = ">=6.5.0,<7.0.0"
+streamlit-card = ">=1.0.2,<2.0.0"
+streamlit-elements = ">=0.1.0,<0.2.0"
+
+[tool.poetry.scripts]
+dev = "finance_daily.cli:dev"
+prod = "finance_daily.cli:prod"
+nightly_fetch = "finance_daily.cli:nightly_fetch"
+dev_nightly_fetch = "finance_daily.cli:dev_nightly_fetch"
 
 [build-system]
 requires = ["poetry-core>=2.0.0,<3.0.0"]
