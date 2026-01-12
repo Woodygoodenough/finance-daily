@@ -1,6 +1,11 @@
 import streamlit as st
 
-from finance_daily.state import get_app_ctx, get_app_config, update_app_ctx
+from finance_daily.state import (
+    get_app_ctx,
+    get_app_config,
+    update_app_ctx,
+    refresh_everything,
+)
 from finance_daily.constants import DatasetName, SnapshotFields
 from finance_daily.components import SnapshotTableSpec, render_snapshot_table
 from finance_daily.components import NewsFeedSpec, df_to_news_items, render_news_feed
@@ -28,7 +33,7 @@ with top_col_1:
     )
 
     if refresh_clicked:
-        update_app_ctx()
+        refresh_everything()
 
     st.metric(
         "Last refresh",

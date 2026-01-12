@@ -7,7 +7,7 @@ from finance_daily.shared_types import ETLTickers, Ticker
 from finance_daily.constants import TICKERS_F, DatasetName
 
 
-@st.cache_data
+@st.cache_data(ttl=300)
 def load_dataset(dsname: DatasetName, *, config: AppConfig) -> pd.DataFrame | None:
     file_path = config.data_dir / dsname.value
     if not file_path.exists():

@@ -18,6 +18,7 @@ def get_app_ctx() -> AppContext:
 
 
 def update_app_ctx() -> AppContext:
+
     last_etl_timestamp = _load_etl_meta(get_app_config())
     ctx = AppContext(
         lastest_data_date=last_etl_timestamp,
@@ -27,6 +28,24 @@ def update_app_ctx() -> AppContext:
     )
     st.session_state[_CTX_KEY] = ctx
     return ctx
+
+
+def refresh_everything():
+    # 1) Clear Streamlit caches (only if you use @st.cache_data / @st.cache_resource)
+    try:
+        st.cache_data.clear()
+    except Exception:
+        pass
+    try:
+        st.cache_resource.clear()
+    except Exception:
+        pass
+
+    # 2) Clear your session_state context so it will be rebuilt
+    st.session_state.pop(_CTX_KEY, None)
+
+    # 3) Force rerun so UI immediately reflects new data
+    st.rerun()
 
 
 def _load_etl_meta(config: AppConfig) -> datetime:
